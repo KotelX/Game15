@@ -17,11 +17,18 @@
                        VerticalAlignment="Top"
                            Grid.Column="1"
                            Grid.Row="0"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-                <TextBox Text="2"/>
-                <TextBlock Text="x"/>
-                <TextBox Text="2"/>
-            </StackPanel>
+            <Border BorderBrush="Azure"
+                    BorderThickness="0.5"
+                    CornerRadius="3"
+                    HorizontalAlignment="Center" 
+                    Margin="8">
+            <TextBlock FontFamily="Georgia"
+                      FontSize="18"
+                      Foreground="#FFFBEA"
+                      Background="Transparent"
+                      x:Name="TextBoxForMap"
+                      Margin="2"/>
+            </Border>
             <Border BorderBrush="White" 
                     Background="Transparent" 
                     BorderThickness="1"  

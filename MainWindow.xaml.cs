@@ -24,14 +24,13 @@ namespace Game15
         public MainWindow()
         {
             InitializeComponent();
-            this.UserView.Content = (object)(new ChangeSize());
+            ReadSize();
         }
 
         //сделать мигающее окно при победе (тени)
         private void ReadSize()
         {
-            
-            //MessageBox.Show(new ChangeSize().ToString());
+            this.UserView.Content = (object)(new ChangeSize());
         }
         bool ViewMap(Map map = null)
         {

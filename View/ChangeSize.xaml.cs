@@ -13,7 +13,9 @@ namespace Game15.View
     public partial class ChangeSize : UserControl
     {
         private const int _Size = 5;
+
         private List<int> borderIndex = new List<int>(_Size);
+
         public ChangeSize()
         {
             InitializeComponent();
@@ -27,20 +29,15 @@ namespace Game15.View
             }
             ShowGridMapOnLoad();
         }
-        ///GOTO:разобратся с постоянным вызовом сборщика мусора
-        private void ShowGridMapOnLoad(Position position = null)
+
+        private void ShowGridMapOnLoad()
         {
-            if (position == null) position = new Position();
-            GridMap.Children.Clear(); ;
+            GridMap.Children.Clear();
             for (int i = 0; i < _Size; i++)
             {
                 for (int j = 0; j < _Size; j++)
                 {
-                    Border border;
-                    if (j < position.X && i < position.Y) 
-                        border = new Border() { Background = Brushes.Azure, BorderBrush = Brushes.SlateGray, BorderThickness = new Thickness(1), OpacityMask = Brushes.Red};
-                    else
-                        border = new Border() { Background = Brushes.Transparent, BorderBrush = Brushes.White, BorderThickness = new Thickness(1)};
+                    Border border = new Border() { Background = Brushes.Transparent, BorderBrush = Brushes.White, BorderThickness = new Thickness(1)};
                     border.MouseEnter += gridMapEnter;
                     border.MouseLeftButtonDown += gridMapClick;
                     border.Margin = new Thickness(1);
@@ -51,14 +48,29 @@ namespace Game15.View
                 }
             }
         }
+
         private void UpdateGridMap(Position position)
         {
-            for (int i = 0; i < GridMap.Children.Count; i++)
+            for (int i = 0; i < _Size; i++)
             {
-                if (i % _Size < position.X)
-                    GridMap.Children.RemoveAt(borderIndex[i]);
+                for (int j = 0; j < _Size; j++)
+                {
+                    int number = i * _Size + j;
+                    var border = ((Border)GridMap.Children[number]);
+                    if (j < position.X && i < position.Y)
+                    {
+                        border.Background = Brushes.Azure;
+                        border.BorderBrush = Brushes.SlateGray;
+                    }
+                    else
+                    {
+                        border.Background = Brushes.Transparent;
+                        border.BorderBrush = Brushes.White;
+                    }
+                }
             }
         }
+
         private void gridMapClick(object sender, RoutedEventArgs e)
         {
             var position = getElemntNumber((Border)sender);
@@ -71,6 +83,7 @@ namespace Game15.View
             TextBoxForMap.Text = $"{position.X} x {position.Y}";
             UpdateGridMap(position);
         }
+
         private Position getElemntNumber(Border border)
         {
             if (border == null) return null;

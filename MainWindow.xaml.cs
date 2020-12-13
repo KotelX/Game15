@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Game15.View;
+using Game15.Models;
 
 namespace Game15
 {
@@ -21,6 +22,8 @@ namespace Game15
     /// </summary>
     public partial class MainWindow : Window
     {
+        public int Size;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -32,6 +35,7 @@ namespace Game15
         {
             this.UserView.Content = (object)(new ChangeSize());
         }
+
         bool ViewMap(Map map = null)
         {
             return true;

@@ -7,14 +7,35 @@ using System.Windows.Media;
 using Game15.Models;
 using System.Linq;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Game15.View
 {
-    public partial class ChangeSize : UserControl
+    public partial class ChangeSize : UserControl, INotifyPropertyChanged
     {
+        private Position _changedSize;
+        public Position ChangedSize 
+        { 
+            get 
+            {
+                return _changedSize;
+            }
+            private set 
+            {
+                if (value.X < 0 && value.Y > 0) return;
+                _changedSize = value; 
+                NotifyPropertyChanged();
+            } 
+        }
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(_changedSize, new PropertyChangedEventArgs("Size"));
+        }
+
         private const int _Size = 5;
 
-        private List<int> borderIndex = new List<int>(_Size);
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public ChangeSize()
         {
@@ -42,7 +63,7 @@ namespace Game15.View
                     border.MouseLeftButtonDown += gridMapClick;
                     border.Margin = new Thickness(1);
                     border.Name = $"C{j + 1}R{i + 1}";
-                    borderIndex.Add(GridMap.Children.Add(border));
+                    GridMap.Children.Add(border);
                     Grid.SetColumn(border, j);
                     Grid.SetRow(border, i);
                 }
@@ -73,8 +94,7 @@ namespace Game15.View
 
         private void gridMapClick(object sender, RoutedEventArgs e)
         {
-            var position = getElemntNumber((Border)sender);
-            //MessageBox.Show(position.ToString());
+            ChangedSize = getElemntNumber((Border)sender);
         }
 
         private void gridMapEnter(object sender, RoutedEventArgs e)

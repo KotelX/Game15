@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Game15.View;
 using Game15.Models;
+using System.ComponentModel;
 
 namespace Game15
 {
@@ -23,6 +24,7 @@ namespace Game15
     public partial class MainWindow : Window
     {
         public int Size;
+        Map MainMap;
 
         public MainWindow()
         {
@@ -33,12 +35,14 @@ namespace Game15
         //сделать мигающее окно при победе (тени)
         private void ReadSize()
         {
-            this.UserView.Content = (object)(new ChangeSize());
+            var changedSize = new ChangeSize();
+            changedSize.PropertyChanged += ViewMap;
+            this.UserView.Content = changedSize;
         }
 
-        bool ViewMap(Map map = null)
+        void ViewMap(object sender, PropertyChangedEventArgs e)
         {
-            return true;
+            MessageBox.Show(((Position)sender).ToString());
         }
     }
 }

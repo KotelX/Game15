@@ -2,16 +2,30 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <StartupObject>Game15.App</StartupObject>
+    <Version>1.1.0</Version>
+    <Authors>Pyt</Authors>
+    <Company>Pyt</Company>
+    <PackageIcon>mainico.ico</PackageIcon>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Key.pfx</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
+    <Copyright>Voobse poh na prava. Pyt</Copyright>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="mainicon.ico" />
+    <None Remove="View\bear.jpg" />
+    <None Remove="View\Desert.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="mainicon.ico" />
+    <Resource Include="View\bear.jpg" />
+    <Resource Include="View\Desert.jpg" />
   </ItemGroup>
 
 </Project>

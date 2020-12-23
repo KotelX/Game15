@@ -6,10 +6,9 @@
         xmlns:local="clr-namespace:Game15"
         mc:Ignorable="d"
         Title="PytGame"
-        Width="200"
-        Height="400"
         Icon="/mainicon.ico"
-        Style="{StaticResource MainWindowStyle}"
-        >
-    <ContentPresenter x:Name="UserView" Content="{Binding}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        Style="{StaticResource MainWindowStyle}" Padding="0">
+    <Grid>
+        <ContentPresenter x:Name="UserView" Content="{Binding}" Margin="0" Width="auto" Height="auto"/>
+    </Grid>
 </Window>
